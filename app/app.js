@@ -261,69 +261,23 @@ function receivedMessage(event) {
     switch (messageText.replace(/[^\w\s]/gi, '').trim().toLowerCase()) {
       case 'hello':
       case 'hi':
-        sendHiMessage(senderID);
-        break;
-
-      case 'image':
-        requiresServerURL(sendImageMessage, [senderID]);
-        break;
-
-      case 'gif':
-        requiresServerURL(sendGifMessage, [senderID]);
-        break;
-
-      case 'audio':
-        requiresServerURL(sendAudioMessage, [senderID]);
-        break;
-
-      case 'video':
-        requiresServerURL(sendVideoMessage, [senderID]);
-        break;
-
-      case 'file':
-        requiresServerURL(sendFileMessage, [senderID]);
-        break;
-
-      case 'button':
-        sendButtonMessage(senderID);
-        break;
-
-      case 'generic':
-        requiresServerURL(sendGenericMessage, [senderID]);
-        break;
-
-      case 'receipt':
-        requiresServerURL(sendReceiptMessage, [senderID]);
-        break;
-
-      case 'quick reply':
-        sendQuickReply(senderID);
-        break;
-
-      case 'read receipt':
-        sendReadReceipt(senderID);
-        break;
-
-      case 'typing on':
-        sendTypingOn(senderID);
-        break;
-
-      case 'typing off':
-        sendTypingOff(senderID);
-        break;
-
-      case 'account linking':
-        requiresServerURL(sendAccountLinking, [senderID]);
+        sendTextMessage(senderID, "Hello - would you like to hear about Argelander?");
         break;
 
       default:
-        sendTextMessage(senderID, messageText);
+
+        const data = 'Argelander was born in Memel in the Kingdom of Prussia (now Klaipėda in Lithuania), the son of a father of Finnish descent, Johann Gottfried Argelander, and German (Prussian) mother, Wilhelmina Dorothea Grünhagen. He studied with Friedrich Bessel, and obtained his Ph.D. in 1822 at University of Königsberg. From 1823 until 1837, Argelander was the head of the Finnish observatory, first in Turku and then in Helsinki. He then moved to Bonn, Germany. There he designed and built a new observatory at the University of Bonn with funding approved directly by King Frederick William IV whom Argelander had become friends with in his childhood. (This lifelong friendship started when the then crown prince temporarily lived in Argelander\'s parents house after the Prussian royal family fled to Memel after the Battle of Jena–Auerstedt during the Napoleonic Wars. Argelander excelled in developing effective, simple and fast methods for measuring star positions and magnitudes, thereby making a pioneering work for modern astronomy. He also measured star distances with heliometers. His, and his collaborators\', great practical works of star cataloging and variable star research were made possible by the systematic usage of then newly developed techniques. Argelander was the first astronomer to begin a careful study of variable stars. Only a handful were known when he began, and he was responsible for introducing the modern system of identifying them.[3] He also made a rough determination of the direction in which the Sun was moving. In 1842, he discovered that Groombridge 1830 had a very high proper motion. For many decades its proper motion was the highest known; today it still occupies third place. For a time, it was known as Argelanders Star.'
+
+        const sentences = data.split('. ');
+
+        const response = sentences[Math.floor(Math.random()*sentences.length)];
+
+        sendTextMessage(senderID, response);
     }
   } else if (messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
   }
 }
-
 
 /*
  * Delivery Confirmation Event
